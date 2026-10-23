@@ -438,14 +438,51 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
 .believe strong{color:var(--ink);font-weight:700}
 
 /* ---------- 26 close ---------- */
-#s26{justify-content:center;gap:40px}
-#s26 .logo{width:72px;height:72px;color:var(--on-color);--lb:#8db0ff;--la:#8db0ff}
-.remember{font:800 84px/1 var(--f);letter-spacing:-.03em;max-width:20ch;text-wrap:balance}
-.zeros{font:700 40px/1.2 var(--f);color:#8db0ff;display:flex;flex-wrap:wrap;gap:6px 40px}
-.close-row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:64px;align-items:end}
-.close-row p{font-size:23px;line-height:1.5;color:rgba(251,252,254,.85);max-width:58ch}
-.thanks b{display:block;font:800 56px/1 var(--f);letter-spacing:-.02em}
-.thanks span{display:block;margin-top:12px;font-size:21px;color:rgba(251,252,254,.8)}
+#s26{justify-content:center}
+.close-l{display:flex;flex-direction:column;gap:28px;max-width:660px}
+.close-logo{width:60px;height:60px}
+.remember{font:800 66px/1.02 var(--f);letter-spacing:-.03em;text-wrap:balance}
+.zeros{display:flex;flex-direction:column;gap:4px;font:700 30px/1.2 var(--f);color:var(--cold)}
+.close-why{font-size:21px;line-height:1.45;color:var(--ink-2)}
+.thanks b{display:block;font:800 50px/1 var(--f);letter-spacing:-.02em}
+.thanks span{display:block;margin-top:10px;font-size:20px;color:var(--ink-2)}
+
+/* ---------- 3D server hall the deck flies through ---------- */
+.scene3d{position:absolute;inset:0;z-index:0;opacity:0;transition:opacity .45s ease;pointer-events:none}
+.scene3d.show{opacity:1}
+.scene3d canvas{display:block;width:1600px;height:900px}
+.stage > .slide{z-index:1}
+.has3d .slide[data-scene]{background:transparent}
+.has3d .fallback2d{visibility:hidden}
+.only3d{display:none}
+.has3d .only3d{display:block}
+.tags{position:absolute;inset:0;z-index:5;pointer-events:none}
+.tag{position:absolute;left:0;top:0;display:flex;flex-direction:column;align-items:center;opacity:0;transition:opacity .35s ease;--tc:var(--ink)}
+.tag.on{opacity:1}
+.tag.hot{--tc:var(--heat)}.tag.cold{--tc:var(--cold)}.tag.amber{--tc:#b86a00}
+.tag span{background:#fbfcfe;color:var(--ink);border:2px solid var(--tc);border-radius:5px;padding:8px 13px;font:700 19px/1.2 var(--f);white-space:nowrap;text-align:center}
+.tag span small{display:block;margin-top:2px;font:500 15px/1.3 var(--f);color:var(--ink-2)}
+.tag i{width:2px;height:30px;background:var(--tc)}
+.scene-cap{position:absolute;left:96px;bottom:40px;font:500 16px/1 var(--f);color:var(--muted)}
+
+/* ---------- presenter tools: all slides (G), notes (N) ---------- */
+.overview{position:fixed;inset:0;z-index:60;background:rgba(16,21,28,.97);color:#e9edf2;overflow:auto;
+  padding:48px max(32px,env(safe-area-inset-right,0px)) 48px max(32px,env(safe-area-inset-left,0px))}
+.ov-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px 24px;max-width:1400px;margin:0 auto 28px}
+.ov-head h2{font:800 34px/1 var(--f)}
+.ov-head p{font:500 16px/1.4 var(--f);color:#aeb7c2}
+.ov-grid{margin:0 auto;max-width:1400px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.ov-grid button{width:100%;min-height:104px;text-align:left;display:flex;flex-direction:column;gap:10px;padding:16px 18px;border:2px solid #2a323d;border-radius:6px;background:#161c24;color:inherit;cursor:pointer;font:600 18px/1.25 var(--f)}
+.ov-grid button span{font:800 15px/1 var(--f);color:#8a95a3}
+.ov-grid button:hover{border-color:#e9edf2}
+.ov-grid button[aria-current="true"]{background:var(--cold);border-color:var(--cold)}
+.ov-grid button[aria-current="true"] span{color:#dbe5ff}
+.notes-drawer{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#10151c;color:#e9edf2;max-height:38vh;overflow:auto;
+  padding:18px max(28px,env(safe-area-inset-right,0px)) max(22px,env(safe-area-inset-bottom,0px)) max(28px,env(safe-area-inset-left,0px))}
+.nd-head{display:flex;justify-content:space-between;gap:16px;font:700 15px/1.2 var(--f);color:#aeb7c2;margin-bottom:8px}
+.nd-text{font:500 22px/1.5 var(--f);max-width:92ch}
+.nd-next{font:500 15px/1.4 var(--f);color:#aeb7c2;margin-top:10px}
+.notes-open .controls{opacity:0;pointer-events:none}
 
 /* ---------- narrow screens: stacked reading mode ---------- */
 @media (max-width:760px){
@@ -455,7 +492,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
   .stage{position:relative;width:auto;height:auto;transform:none;overflow:visible}
   .slide,#s1,#s8,#s21{position:relative;inset:auto;opacity:1;visibility:visible;transition:none;gap:22px;
     padding-top:52px;padding-bottom:52px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-  .controls,.toast,.pg{display:none}
+  .controls,.toast,.pg,.scene3d,.tags,.overview,.notes-drawer,.scene-cap{display:none!important}
   .title-grid,.split,.sim-grid,.cust,.cares,.reach,.uvp-cols,.model,.slegend,.scale-grid,.costs,.mk,.ad,.ask,.inv,.road,.future,.close-row,.hook-row{grid-template-columns:minmax(0,1fr)}
   .t,#s20 .t{font-size:40px}
   #s6 .t{font-size:56px}
@@ -541,18 +578,20 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
 <main class="deck" id="deck">
 <div class="stage-wrap">
 <div class="stage" id="stage" aria-roledescription="slideshow" aria-label="ThermoCompute pitch">
+<div class="scene3d" id="scene3d" aria-hidden="true"></div>
 
 <!-- 01 TITLE -->
-<section class="slide active on" id="s1" data-title="ThermoCompute" aria-label="Title">
+<section class="slide active on" id="s1" data-scene="title" data-title="ThermoCompute" aria-label="Title">
   <div class="title-grid">
     <div class="title-text">
       <svg class="logo logo-big" role="img" aria-label="ThermoCompute logo"><use href="#logo"/></svg>
       <h1 class="wordmark" aria-label="ThermoCompute">Thermo<br>Compute</h1>
       <p class="tagline">Predictive Cooling for the AI Era.</p>
     </div>
-    <canvas id="heroCanvas" aria-label="A cluster of server racks: one hot rack cools down as its work moves to cooler racks"></canvas>
+    <canvas id="heroCanvas" class="fallback2d" aria-label="A cluster of server racks: one hot rack cools down as its work moves to cooler racks"></canvas>
   </div>
   <p class="title-foot"><b>Aryan, Simon and Adam</b><span>Data Center Energy &amp; Thermal Optimization</span></p>
+  <aside class="notes" hidden>Hi Sharks. We're Aryan, Simon and Adam, and this is ThermoCompute: predictive cooling for the AI era.</aside>
 </section>
 
 <!-- 02 HOOK -->
@@ -567,16 +606,17 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       <p class="hs-2">Operators overcool entire facilities just to prevent micro-hotspots, burning millions of dollars in wasted electricity.</p>
     </div>
   </div>
+  <aside class="notes" hidden>Sharks, AI is consuming so much power that data centers are literally overheating, and 40% of their electricity bill goes toward cooling GPUs. Operators overcool their entire facilities just to prevent micro-hotspots, burning millions of dollars in wasted electricity.</aside>
 </section>
 
 <!-- 03 PROBLEM -->
-<section class="slide" id="s3" data-title="The problem" aria-label="The problem">
+<section class="slide" id="s3" data-scene="problem" data-title="The problem" aria-label="The problem">
   <div class="split">
     <div class="split-text">
       <h2 class="t">One micro‑hotspot. A whole facility overcooled.</h2>
       <p class="lead">Data centers running high-density AI training develop localized micro-hotspots. To protect expensive GPUs, operators aggressively overcool the entire facility, wasting massive amounts of electricity.</p>
     </div>
-    <figure class="hall" id="hall" aria-label="Server hall seen from above: three racks run at 35 degrees while every other rack is overcooled">
+    <figure class="hall fallback2d" id="hall" aria-label="Server hall seen from above: three racks run at 35 degrees while every other rack is overcooled">
       <div class="hall-head"><span>Server hall, seen from above</span><span>Cooling units at <b>100%</b></span></div>
       <div class="hall-body">
         <div class="cracs" aria-hidden="true">
@@ -597,6 +637,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       </figcaption>
     </figure>
   </div>
+  <aside class="notes" hidden>Here's the problem up close. A few racks running heavy AI training get dangerously hot. To protect those GPUs, operators blast cooling across the whole hall, so every other rack sits at about 18°C while the cooling units run flat out.</aside>
 </section>
 
 <!-- 04 WHO -->
@@ -607,6 +648,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
     <div><dt>When and where</dt><dd>Inside server racks and server rooms at data centers worldwide, during heavy AI model training runs and peak compute.</dd></div>
     <div><dt>Why it matters</dt><dd>Cooling is roughly 40% of a data center’s electricity bill. Overcooling wastes millions per facility, strains electrical grids and increases carbon emissions.</dd></div>
   </dl>
+  <aside class="notes" hidden>This hits data center operators, cloud providers like AWS, Azure, Google Cloud and Equinix, and enterprise AI infrastructure teams. It happens inside server rooms worldwide during heavy training runs, and cooling is about 40% of the power bill.</aside>
 </section>
 
 <!-- 05 STAKES -->
@@ -622,12 +664,14 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
     <li style="--i:3;--h:52%;--c:#e0301e"><h3>Blackouts become possible</h3><p>Peak demand strains local grids.</p><span class="st-bar"></span></li>
     <li style="--i:4;--h:64%;--c:#b5122a"><h3>Sustainability targets slip</h3><p>Wasted energy means more emissions.</p><span class="st-bar"></span></li>
   </ol>
+  <aside class="notes" hidden>If nobody fixes this, costs keep climbing as AI expands, servers throttle, expensive hardware wears out early, grids strain toward blackouts, and sustainability targets slip.</aside>
 </section>
 
 <!-- 06 SOLUTION -->
 <section class="slide blue" id="s6" data-title="The solution" aria-label="The solution">
   <h2 class="t">Solve heat at the software layer.</h2>
   <p class="lead">ThermoCompute is a B2B enterprise SaaS platform. It plugs into the server orchestration software a data center already runs, predicts thermal hotspots 10 minutes before they happen, and routes heavy AI training jobs to cooler racks or cooler locations.</p>
+  <aside class="notes" hidden>Our solution is pure software. ThermoCompute plugs into the server management tools data centers already use, predicts hotspots 10 minutes before they happen, and routes heavy AI jobs to cooler racks or cooler locations.</aside>
 </section>
 
 <!-- 07 COMPARISON -->
@@ -645,17 +689,19 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       </tbody>
     </table>
   </div>
+  <aside class="notes" hidden>Compare that with hardware. Bigger air conditioners or liquid cooling cost millions upfront and take disruptive installs. We cost nothing upfront, deploy remotely in hours, and act before the heat appears.</aside>
 </section>
 
 <!-- 08 SIMULATION -->
-<section class="slide" id="s8" data-title="Simulation" aria-label="Simulation of predictive cooling">
+<section class="slide" id="s8" data-scene="sim" data-title="Simulation" aria-label="Simulation of predictive cooling">
   <div class="sim-grid">
-    <figure class="sim-canvas">
+    <figure class="sim-canvas fallback2d">
       <canvas id="simCanvas" aria-label="Server hall: a hotspot forms, is forecast, and AI jobs move to cooler racks until every rack runs cool"></canvas>
       <figcaption>Simulation with illustrative values</figcaption>
     </figure>
     <div class="sim-side">
       <h2 class="t">Watch a hotspot disappear before it forms</h2>
+      <p class="scene-cap only3d">Simulation with illustrative values</p>
       <p class="txt">A training run heats four racks. ThermoCompute sees the spike coming 10 minutes early, moves jobs to idle racks and to a cooler facility, and the cooling plant eases off.</p>
       <ol class="flow" id="simPhases"><li>Read telemetry</li><li>Forecast the hotspot</li><li>Move the jobs</li><li>Cooling eases off</li></ol>
       <div class="ro-grid">
@@ -667,6 +713,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       <button class="btn" id="simReplay" type="button"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4"/></svg>Replay</button>
     </div>
   </div>
+  <aside class="notes" hidden>Let's watch it work. A training run starts heating four racks. Ten minutes before they peak, ThermoCompute forecasts the hotspot, moves jobs to idle racks and even to a cooler facility in Dublin, and the cooling plant eases off. Press Replay to run it again.</aside>
 </section>
 
 <!-- 09 HOW IT WORKS -->
@@ -686,6 +733,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
     <div class="link" style="--k:3" aria-hidden="true"><i></i></div>
     <div class="node" role="listitem"><h3>Savings billed</h3><p>Balance holds without cranking the HVAC. Savings are measured, and we bill 30% of them.</p></div>
   </div>
+  <aside class="notes" hidden>Step by step: we connect through a secure API, our AI reads GPU load, fan speeds, ambient temperatures and task queues, forecasts the hotspot, shifts the work, and bills a share of the verified savings.</aside>
 </section>
 
 <!-- 10 FEATURES -->
@@ -704,6 +752,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
     </table>
   </div>
   <p class="spec-foot"><span><b>Deployment</b>Remote, through a secure API</span><span><b>Hardware required</b>None</span><span><b>Billing</b>30% of validated savings</span></p>
+  <aside class="notes" hidden>Five core features: the 10-minute predictive engine, dynamic workload routing, cross-facility balancing during heatwaves, zero-friction integration with Kubernetes, VMware and OpenStack, and a live energy and cost dashboard.</aside>
 </section>
 
 <!-- 11 DASHBOARD -->
@@ -746,6 +795,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       </div>
     </div>
   </div>
+  <aside class="notes" hidden>Customers see a web dashboard with a live 3D heat map, a log of every job we move, and their savings tracked to the dollar.</aside>
 </section>
 
 <!-- 12 CUSTOMER -->
@@ -775,6 +825,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
     </div>
   </div>
   <p class="need">AI workloads are overwhelming physical cooling systems. ThermoCompute is an immediate software fix that needs no multi-million-dollar hardware overhaul.</p>
+  <aside class="notes" hidden>Our ideal customers are hyperscale data centers, enterprise cloud hosters and co-location facilities from 10 to over 100 megawatts. We sell to CTOs, COOs, operations managers and sustainability officers who care about costs, uptime, GPU lifespan, ESG goals and avoiding downtime.</aside>
 </section>
 
 <!-- 13 REACH -->
@@ -795,6 +846,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       </ul>
     </div>
   </div>
+  <aside class="notes" hidden>They're concentrated in corridors like Northern Virginia, Silicon Valley, Frankfurt, Dublin and Tokyo. We reach them through direct enterprise sales, trade shows, executive networks and integration partnerships.</aside>
 </section>
 
 <!-- 14 COMPETITION -->
@@ -811,6 +863,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
     </table>
   </div>
   <p class="verdict"><strong>Why customers choose ThermoCompute:</strong> an immediate financial return with zero upfront cost and zero hardware downtime, running automatically in the background.</p>
+  <aside class="notes" hidden>Hardware vendors like Vertiv and Schneider Electric need millions upfront. Monitoring tools like Nlyte and Sunbird only alert after the fact. Manual balancing wastes up to 40% of energy. We act automatically, with zero upfront cost.</aside>
 </section>
 
 <!-- 15 VALUE PROPOSITION -->
@@ -820,6 +873,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
     <div><h3>Our biggest advantage</h3><p class="txt">Risk-free performance billing. We only get paid when the customer saves money, and our 10-minute predictions act before any heat builds.</p></div>
     <div><h3>Why customers switch</h3><p class="txt">An immediate financial return with zero upfront cost and zero hardware downtime, working automatically in the background.</p></div>
   </div>
+  <aside class="notes" hidden>In one sentence: we help data center operators solve excessive cooling costs and GPU overheating with predictive, zero-upfront workload routing, unlike competitors who need expensive retrofits or passive monitoring.</aside>
 </section>
 
 <!-- 16 MODEL -->
@@ -844,6 +898,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       <p class="buy"><strong>We sell</strong> predictive thermal management software licenses to data center owners, cloud providers and AI infrastructure facilities, through enterprise sales agreements and cloud API installs.</p>
     </div>
   </div>
+  <aside class="notes" hidden>Here's the kicker. We charge zero dollars upfront. We install remotely and take 30% of the power bill savings we generate. A 50-megawatt data center saves about 3 million dollars a year, so they keep 2.1 million and we earn 900,000, every year.</aside>
 </section>
 
 <!-- 17 SCALE -->
@@ -871,6 +926,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       <p><strong>No hardware cost</strong> for us or for our customers.</p>
     </div>
   </div>
+  <aside class="notes" hidden>That's 900,000 dollars of recurring revenue per facility. Twenty data centers is 18 million a year, at software margins of 85% or more, with no hardware cost to us or our customers.</aside>
 </section>
 
 <!-- 18 COSTS -->
@@ -891,6 +947,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       <div class="bar-total"><span>Total</span><b>$1.5M</b></div>
     </div>
   </div>
+  <aside class="notes" hidden>Our main costs are 650,000 for people, 500,000 for marketing, 250,000 for technology and 100,000 for legal and patents. We have no materials or packaging costs.</aside>
 </section>
 
 <!-- 19 MARKETING -->
@@ -917,6 +974,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
     </div>
   </div>
   <blockquote class="msg">“Slash your data center power bill by millions today. Zero upfront cost, zero hardware installs, 100% performance guaranteed.”</blockquote>
+  <aside class="notes" hidden>Our most important channel is direct enterprise sales and partnerships, because these are big, trust-based contracts. Our message: slash your power bill by millions, with zero upfront cost and zero hardware installs.</aside>
 </section>
 
 <!-- 20 AD -->
@@ -946,6 +1004,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
     <p>Stop cooling empty space. Start routing intelligent compute.</p>
     <small>Try ThermoCompute risk-free today.</small>
   </div>
+  <aside class="notes" hidden>Our campaign is a split-screen video. On the left, a facility glowing hot with money blowing out the vents. On the right, a cool facility with a savings counter climbing. Stop cooling empty space. Start routing intelligent compute.</aside>
 </section>
 
 <!-- 21 ASK -->
@@ -970,6 +1029,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       <p class="ask-why">The round pays for scaling our core software, building the enterprise sales team and landing our first 15–20 data center deployments.</p>
     </div>
   </div>
+  <aside class="notes" hidden>We're asking for 700,000 dollars for 20% of ThermoCompute. Most of it goes to marketing and technology, and it funds an 18-month runway to land our first 15 to 20 data centers.</aside>
 </section>
 
 <!-- 22 INVEST -->
@@ -983,6 +1043,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       <div><h3>Pay-for-performance removes friction</h3><p>Customers pay only out of their savings, so there is no reason to wait.</p></div>
     </div>
   </div>
+  <aside class="notes" hidden>Why invest: AI compute is growing exponentially, energy is the biggest bottleneck, and our pay-for-performance model takes the friction out of every sale, in a 20 billion dollar market.</aside>
 </section>
 
 <!-- 23 ROADMAP -->
@@ -1009,6 +1070,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       <p class="metric">NVIDIA, Dell, HPE</p>
     </div>
   </div>
+  <aside class="notes" hidden>Now: pilots with 3 to 5 regional partners. Next: scale sales and sign 20-plus hyperscale facilities for over 15 million a year. Later: ship pre-installed with NVIDIA, Dell and HPE.</aside>
 </section>
 
 <!-- 24 FUTURE -->
@@ -1041,25 +1103,29 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
     </div>
   </div>
   <p class="fut-note">Where power costs more, every degree of thermal savings is worth more, and our 30% share grows with it.</p>
+  <aside class="notes" hidden>Next we add carbon and ESG reporting, renewable grid sync and hardware wear diagnostics, expand into edge networks, crypto mining, supercomputers and OEM deals, and grow in Europe and East Asia where power costs more.</aside>
 </section>
 
 <!-- 25 TEAM -->
 <section class="slide" id="s25" data-title="The team" aria-label="The team">
   <div class="names"><b>Aryan</b><b>Simon</b><b>Adam</b></div>
   <p class="believe">We pair <strong>a deep understanding of software engineering</strong> with a highly scalable, low-risk business strategy that <strong>ties our profit directly to our customers’ savings.</strong></p>
+  <aside class="notes" hidden>We pair deep software engineering skills with a low-risk business model that only makes money when our customers save money.</aside>
 </section>
 
 <!-- 26 CLOSE -->
-<section class="slide ink" id="s26" data-title="Remember this" aria-label="Closing">
-  <svg class="logo" aria-hidden="true"><use href="#logo"/></svg>
-  <p class="remember">ThermoCompute turns wasted electricity into pure revenue for data centers.</p>
-  <p class="zeros"><span>Zero hardware cost.</span><span>Zero upfront risk.</span><span>Zero adoption friction.</span></p>
-  <div class="close-row">
-    <p>It solves one of the most urgent infrastructure and environmental bottlenecks of the AI era, and it builds a scalable business that saves money while easing the strain on the grid.</p>
+<section class="slide" id="s26" data-scene="close" data-title="Remember this" aria-label="Closing">
+  <div class="close-l">
+    <svg class="logo close-logo" aria-hidden="true"><use href="#logo"/></svg>
+    <p class="remember">ThermoCompute turns wasted electricity into pure revenue for data centers.</p>
+    <p class="zeros"><span>Zero hardware cost.</span><span>Zero upfront risk.</span><span>Zero adoption friction.</span></p>
+    <p class="close-why">It solves one of the most urgent infrastructure and environmental bottlenecks of the AI era.</p>
     <div class="thanks"><b>Thank you, Sharks.</b><span>Asking $700,000 for 20% equity</span></div>
   </div>
+  <aside class="notes" hidden>The one thing to remember: ThermoCompute turns wasted electricity into pure revenue for data centers, with zero hardware cost, zero upfront risk and zero adoption friction. Thank you, Sharks.</aside>
 </section>
 
+<div class="tags" id="tags" aria-hidden="true"></div>
 </div>
 </div>
 </main>
@@ -1071,8 +1137,18 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
   <button class="cbtn" id="fs" type="button" aria-label="Enter fullscreen" title="Fullscreen (F), exit with Esc"><svg viewBox="0 0 24 24"><path id="fsIcon" d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
 </div>
 <div class="toast out" id="toast" role="status"></div>
+<div class="overview" id="overview" hidden role="dialog" aria-label="All slides">
+  <div class="ov-head"><h2>All slides</h2><p>Click a slide to jump to it. Press G or Esc to close.</p></div>
+  <ol class="ov-grid" id="ovGrid"></ol>
+</div>
+<aside class="notes-drawer" id="notesDrawer" hidden aria-label="Speaker notes">
+  <div class="nd-head"><span id="ndTitle"></span><span id="ndTimer">0:00</span></div>
+  <p class="nd-text" id="ndText"></p>
+  <p class="nd-next" id="ndNext"></p>
+</aside>
 <div id="tip" hidden></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
@@ -1111,6 +1187,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
   let cur = 0, scale = 1;
   const hooks = {};
   const running = new Set();
+  let S3 = null, sim2dReplay = null;
 
   slides.forEach((s, i) => { if (i > 0) { const p = document.createElement('span'); p.className = 'pg'; p.textContent = i + 1; p.setAttribute('aria-hidden', 'true'); s.appendChild(p); } });
 
@@ -1139,6 +1216,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       deck.style.setProperty('--s', scale.toFixed(4));
     }
     comps.forEach(sizeComp);
+    if (S3) S3.resize(clamp((window.devicePixelRatio || 1) * scale, 1, 2));
   }
 
   /* ---------- count-ups ---------- */
@@ -1182,6 +1260,8 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
     countEl.textContent = (cur + 1) + ' / ' + N;
     prevBtn.disabled = cur === 0;
     nextBtn.disabled = cur === N - 1;
+    syncNotes();
+    markOv();
   }
   const nextSlide = () => go(cur + 1), prevSlide = () => go(cur - 1);
   prevBtn.addEventListener('click', prevSlide);
@@ -1229,19 +1309,23 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
   document.addEventListener('webkitfullscreenchange', onFsChange);
   fsBtn.addEventListener('click', toggleFs);
 
-  document.addEventListener('keydown', e => {
+  function onKey(e) {
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     const k = e.key;
     if (k === 'f' || k === 'F') { e.preventDefault(); toggleFs(); return; }
-    if (k === 'Escape') { if (isFs()) exitFs(); return; }
+    if (k === 'Escape') { if (overviewOpen()) { closeOverview(); return; } if (isFs()) exitFs(); return; }
     if (isNarrow()) return;
+    if ('gGoO'.includes(k)) { e.preventDefault(); overviewOpen() ? closeOverview() : openOverview(); return; }
+    if (k === 'n' || k === 'N') { e.preventDefault(); toggleNotes(); return; }
+    if (k === 'p' || k === 'P') { e.preventDefault(); openPresenter(); return; }
     const onBtn = e.target.closest && e.target.closest('button');
     if ((k === ' ' || k === 'Enter') && onBtn) return;
     if (['ArrowRight', 'PageDown', ' ', 'ArrowDown', 'Enter'].includes(k)) { e.preventDefault(); nextSlide(); }
     else if (['ArrowLeft', 'PageUp', 'ArrowUp', 'Backspace'].includes(k)) { e.preventDefault(); prevSlide(); }
     else if (k === 'Home') { e.preventDefault(); go(0); }
     else if (k === 'End') { e.preventDefault(); go(N - 1); }
-  });
+  }
+  document.addEventListener('keydown', onKey);
 
   /* ---------- controls hide while presenting; cursor hides in fullscreen ---------- */
   const controls = $('#controls');
@@ -1545,7 +1629,7 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
       enter() { if (reduced()) { fastForward(); return; } reset(); running.add(comp); },
       leave() { running.delete(comp); }
     };
-    $('#simReplay').addEventListener('click', () => { reset(); running.add(comp); });
+    sim2dReplay = () => { reset(); running.add(comp); };
   })();
 
   /* ---------- 11: dashboard mockup ---------- */
@@ -1668,6 +1752,466 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
     hooks.s13 = { enter() { if (!reduced()) running.add(comp); }, leave() { running.delete(comp); } };
   })();
 
+
+  /* ---------- presenter tools: all slides (G), notes drawer (N), presenter window (P) ---------- */
+  const ov = $('#overview'), ovGrid = $('#ovGrid');
+  slides.forEach((s, i) => {
+    const li = document.createElement('li'), b = document.createElement('button');
+    b.type = 'button';
+    const num = document.createElement('span'); num.textContent = i + 1;
+    b.append(num, document.createTextNode(s.dataset.title));
+    b.addEventListener('click', () => { closeOverview(); go(i); });
+    li.append(b); ovGrid.append(li);
+  });
+  function overviewOpen() { return !ov.hidden; }
+  function openOverview() { ov.hidden = false; markOv(); const b = ovGrid.querySelectorAll('button')[cur]; if (b) b.focus(); }
+  function closeOverview() { ov.hidden = true; }
+  function markOv() { ovGrid.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-current', i === cur ? 'true' : 'false')); }
+
+  const drawer = $('#notesDrawer'), ndTitle = $('#ndTitle'), ndText = $('#ndText'), ndNext = $('#ndNext'), ndTimer = $('#ndTimer');
+  const notesOf = s => { const a = s && s.querySelector('.notes'); return a ? a.textContent.trim() : ''; };
+  let pres = null, t0 = Date.now();
+  function toggleNotes() { drawer.hidden = !drawer.hidden; document.body.classList.toggle('notes-open', !drawer.hidden); syncNotes(); }
+  function syncNotes() {
+    const s = slides[cur], nx = slides[cur + 1];
+    const head = 'Slide ' + (cur + 1) + ' of ' + N + ': ' + s.dataset.title;
+    const next = nx ? 'Next: ' + nx.dataset.title : 'Last slide';
+    ndTitle.textContent = head; ndText.textContent = notesOf(s); ndNext.textContent = next;
+    if (pres && !pres.closed) {
+      const d = pres.document;
+      d.getElementById('pc').textContent = head;
+      d.getElementById('pn').textContent = notesOf(s);
+      d.getElementById('px').textContent = next;
+    }
+  }
+  setInterval(() => {
+    const sec = Math.floor((Date.now() - t0) / 1000), txt = Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0');
+    ndTimer.textContent = txt;
+    if (pres && !pres.closed) pres.document.getElementById('pt').textContent = txt;
+  }, 1000);
+  const PRES_HTML = '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>ThermoCompute presenter view</title>' +
+    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&display=swap">' +
+    '<style>body{margin:0;background:#10151c;color:#e9edf2;font:500 18px/1.5 "Schibsted Grotesk",Arial,sans-serif;padding:32px;display:flex;flex-direction:column;gap:22px;min-height:100vh;box-sizing:border-box}' +
+    'header{display:flex;justify-content:space-between;align-items:baseline;gap:24px}#pc{font-weight:800;font-size:24px}#pt{font-weight:800;font-size:44px}' +
+    '#pn{font-size:28px;line-height:1.5;max-width:68ch;margin:0}#px{color:#aeb7c2;margin:0}nav{display:flex;gap:12px;margin-top:auto}' +
+    'button{font:inherit;font-weight:700;padding:14px 22px;border-radius:6px;border:2px solid #e9edf2;background:transparent;color:inherit;cursor:pointer}button:hover{background:#e9edf2;color:#10151c}</style></head>' +
+    '<body><header><span id="pc"></span><span id="pt">0:00</span></header><p id="pn"></p><p id="px"></p>' +
+    '<nav><button id="bp" type="button">Previous</button><button id="bn" type="button">Next</button><button id="br" type="button">Restart timer</button></nav></body></html>';
+  function openPresenter() {
+    if (pres && !pres.closed) { pres.focus(); return; }
+    let w = null;
+    try { w = window.open('', 'thermocompute-presenter', 'width=1000,height=660'); } catch (e) { w = null; }
+    if (!w) { toast('The presenter window is blocked here. Press <kbd>N</kbd> to show your notes at the bottom of this screen instead.', 5500); return; }
+    pres = w;
+    w.document.open(); w.document.write(PRES_HTML); w.document.close();
+    w.document.getElementById('bp').addEventListener('click', prevSlide);
+    w.document.getElementById('bn').addEventListener('click', nextSlide);
+    w.document.getElementById('br').addEventListener('click', () => { t0 = Date.now(); });
+    w.document.addEventListener('keydown', onKey);
+    t0 = Date.now();
+    syncNotes();
+  }
+
+  /* ---------- 3D server hall: one model the deck flies through ---------- */
+  function makeHall3D(host, tagHost) {
+    const T = window.THREE;
+    if (!T) return null;
+    let renderer;
+    try {
+      renderer = new T.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+      if (!renderer.getContext()) return null;
+    } catch (e) { return null; }
+    const lin = c => (Array.isArray(c) ? new T.Color(c[0] / 255, c[1] / 255, c[2] / 255) : new T.Color(c)).convertSRGBToLinear();
+    const BG = lin('#f3f5f8');
+    renderer.setClearColor(BG, 1);
+    renderer.outputEncoding = T.sRGBEncoding;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = T.PCFSoftShadowMap;
+    renderer.setSize(W, H, false);
+    host.appendChild(renderer.domElement);
+    const scene = new T.Scene();
+    scene.background = BG;
+    scene.fog = new T.Fog(BG, 28, 64);
+    const camera = new T.PerspectiveCamera(30, W / H, .1, 300);
+    scene.add(new T.HemisphereLight(lin('#ffffff'), lin('#cdd6e2'), .95));
+    const sun = new T.DirectionalLight(lin('#ffffff'), .85);
+    sun.position.set(-7, 16, 9);
+    sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048);
+    const sc = sun.shadow.camera;
+    sc.left = -16; sc.right = 16; sc.top = 16; sc.bottom = -16; sc.near = 1; sc.far = 60; sc.updateProjectionMatrix();
+    sun.shadow.bias = -.0005;
+    scene.add(sun);
+    const maxAniso = renderer.capabilities.getMaxAnisotropy();
+    function tex(w, h, draw, rep) {
+      const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+      draw(cv.getContext('2d'), w, h);
+      const t = new T.CanvasTexture(cv);
+      t.encoding = T.sRGBEncoding; t.anisotropy = maxAniso;
+      if (rep) { t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(rep[0], rep[1]); }
+      return t;
+    }
+
+    // layout: six rows of twelve racks, paired across cold aisles
+    const COLS = 12, ROWS = 6, RW = .6, RD = 1.1, RH = 2.0, COLD = 1.4, HOT = 1.0;
+    const rowZ = [];
+    { let z = 0; for (let j = 0; j < ROWS; j++) { rowZ.push(z); z += RD + (j % 2 === 0 ? COLD : HOT); } const mid = (rowZ[0] + rowZ[ROWS - 1]) / 2; for (let j = 0; j < ROWS; j++) rowZ[j] -= mid; }
+    const xOf = i => (i - (COLS - 1) / 2) * (RW + .03);
+    const rowLen = COLS * (RW + .03);
+
+    // raised floor of 60 cm tiles, perforated tiles in the cold aisles
+    const floorTex = tex(256, 256, (g, w, h) => {
+      g.fillStyle = '#eef1f5'; g.fillRect(0, 0, w, h);
+      g.strokeStyle = '#d7dde6'; g.lineWidth = 2;
+      for (let k = 0; k <= 4; k++) { const q = k * 64; g.beginPath(); g.moveTo(q, 0); g.lineTo(q, h); g.moveTo(0, q); g.lineTo(w, q); g.stroke(); }
+    }, [167, 167]);
+    const floor = new T.Mesh(new T.PlaneGeometry(400, 400), new T.MeshStandardMaterial({ map: floorTex, roughness: .95 }));
+    floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+    for (let j = 0; j < ROWS; j += 2) {
+      const depth = COLD - .1;
+      const t = tex(64, 64, (g, w, h) => {
+        g.fillStyle = '#e1e9f7'; g.fillRect(0, 0, w, h);
+        g.fillStyle = '#bccbe6'; for (let y = 4; y < h; y += 8) for (let x = 4; x < w; x += 8) { g.beginPath(); g.arc(x, y, 1.8, 0, 6.283); g.fill(); }
+        g.strokeStyle = '#cbd5e4'; g.lineWidth = 2; g.strokeRect(1, 1, w - 2, h - 2);
+      }, [rowLen / .6, depth / .6]);
+      const m = new T.Mesh(new T.PlaneGeometry(rowLen, depth), new T.MeshStandardMaterial({ map: t, roughness: .9 }));
+      m.rotation.x = -Math.PI / 2; m.position.set(0, .004, (rowZ[j] + rowZ[j + 1]) / 2); m.receiveShadow = true; scene.add(m);
+    }
+    for (let j = 0; j < ROWS; j++) {
+      const t = tex(128, 128, (g, w, h) => {
+        g.fillStyle = '#8f9aa8'; g.font = '800 96px "Schibsted Grotesk", Arial, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+        g.fillText('ABCDEF'[j], w / 2, h / 2 + 6);
+      });
+      const m = new T.Mesh(new T.PlaneGeometry(.5, .5), new T.MeshBasicMaterial({ map: t, transparent: true, depthWrite: false }));
+      m.rotation.x = -Math.PI / 2; m.position.set(xOf(0) - .8, .006, rowZ[j]); scene.add(m);
+    }
+
+    // racks: one instanced mesh, coloured by temperature
+    const rackTex = tex(128, 424, (g, w, h) => {
+      g.fillStyle = '#ffffff'; g.fillRect(0, 0, w, h);
+      g.fillStyle = '#e7ebf1'; for (let y = 12; y < h - 12; y += 4) for (let x = 12; x < w - 20; x += 4) g.fillRect(x, y, 2, 2);
+      g.fillStyle = '#c1c8d2'; for (let y = 16; y < h - 12; y += 10) g.fillRect(10, y, w - 28, 1.5);
+      g.fillStyle = '#717d8d'; for (let y = 20; y < h - 16; y += 20) g.fillRect(14, y, 4, 3);
+      g.fillStyle = '#8c97a6'; g.fillRect(w - 15, h * .42, 5, h * .16);
+      g.strokeStyle = '#a9b2be'; g.lineWidth = 6; g.strokeRect(3, 3, w - 6, h - 6);
+    });
+    const matFront = new T.MeshStandardMaterial({ map: rackTex, roughness: .48, metalness: .1 });
+    const matBody = new T.MeshStandardMaterial({ color: 0xffffff, roughness: .52, metalness: .08 });
+    const matTop = new T.MeshStandardMaterial({ color: lin('#f2f4f8'), roughness: .62, metalness: .04 });
+    const rackGeo = new T.BoxGeometry(RW, RH, RD); rackGeo.translate(0, RH / 2, 0);
+    const racksMesh = new T.InstancedMesh(rackGeo, [matBody, matBody, matTop, matBody, matFront, matFront], COLS * ROWS);
+    racksMesh.castShadow = true; racksMesh.receiveShadow = true;
+    const racks = [], dummy = new T.Object3D();
+    for (let j = 0; j < ROWS; j++) for (let i = 0; i < COLS; i++) {
+      const k = j * COLS + i;
+      dummy.position.set(xOf(i), 0, rowZ[j]); dummy.updateMatrix(); racksMesh.setMatrixAt(k, dummy.matrix);
+      racks.push({ i, j, k, x: xOf(i), z: rowZ[j], load: .3, T: 23.4, off: (((i * 13 + j * 7) % 9) / 9 - .5) * .8, id: 'ABCDEF'[j] + '-' + String(i + 1).padStart(2, '0') });
+    }
+    scene.add(racksMesh);
+    const at = (j, i) => racks[j * COLS + i];
+    const col = new T.Color();
+    function paint() {
+      for (const r of racks) { const c = ramp(tOf(r.T)); racksMesh.setColorAt(r.k, col.setRGB(c[0] / 255, c[1] / 255, c[2] / 255).convertSRGBToLinear()); }
+      racksMesh.instanceColor.needsUpdate = true;
+    }
+    paint();
+
+    // cooling units on the left wall, one per cold aisle
+    const cracTex = tex(256, 220, (g, w, h) => {
+      g.fillStyle = '#ffffff'; g.fillRect(0, 0, w, h);
+      g.fillStyle = '#dde3ea'; for (let y = 24; y < h - 20; y += 9) g.fillRect(22, y, w - 44, 4);
+      g.strokeStyle = '#aeb6c2'; g.lineWidth = 6; g.strokeRect(3, 3, w - 6, h - 6);
+    });
+    const cracX = xOf(0) - 2.6;
+    const cracGeo = new T.BoxGeometry(.95, 2.05, 2.3); cracGeo.translate(0, 1.025, 0);
+    const cracFace = new T.MeshStandardMaterial({ map: cracTex, roughness: .5 });
+    const cracBody = new T.MeshStandardMaterial({ color: lin('#f7f8fa'), roughness: .5 });
+    for (let a = 0; a < 3; a++) {
+      const z = (rowZ[a * 2] + rowZ[a * 2 + 1]) / 2;
+      const m = new T.Mesh(cracGeo, [cracFace, cracBody, cracBody, cracBody, cracBody, cracBody]);
+      m.position.set(cracX, 0, z); m.castShadow = true; m.receiveShadow = true; scene.add(m);
+    }
+
+    // cold air flowing down the cold aisles, heat rising off hot racks
+    const dot = tex(64, 64, (g, w, h) => {
+      const gr = g.createRadialGradient(32, 32, 0, 32, 32, 30);
+      gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(.55, 'rgba(255,255,255,.85)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+      g.fillStyle = gr; g.fillRect(0, 0, w, h);
+    });
+    const AIRN = 540, airPos = new Float32Array(AIRN * 3);
+    const airGeo = new T.BufferGeometry(); airGeo.setAttribute('position', new T.BufferAttribute(airPos, 3));
+    const airMat = new T.PointsMaterial({ color: lin('#2f6bff'), size: .17, map: dot, transparent: true, opacity: 0, depthWrite: false });
+    const airPts = new T.Points(airGeo, airMat); airPts.frustumCulled = false; scene.add(airPts);
+    const airP = Array.from({ length: AIRN }, (_, k) => ({ a: k % 3, u: Math.random(), y: .1 + Math.random() * 1.8, o: (Math.random() - .5) * (COLD - .35), s: .6 + Math.random() * .6 }));
+    const ax0 = cracX + .55, ax1 = xOf(COLS - 1) + .6;
+    function stepAir(dt, k) {
+      for (let n = 0; n < AIRN; n++) {
+        const q = airP[n];
+        q.u += dt * q.s * .11 * (.3 + k);
+        if (q.u > 1) { q.u -= 1; q.y = .1 + Math.random() * .4; }
+        q.y += dt * .25 * k; if (q.y > 2.1) q.y = .1;
+        airPos[n * 3] = ax0 + (ax1 - ax0) * q.u; airPos[n * 3 + 1] = q.y; airPos[n * 3 + 2] = (rowZ[q.a * 2] + rowZ[q.a * 2 + 1]) / 2 + q.o;
+      }
+      airGeo.attributes.position.needsUpdate = true;
+    }
+    const HEATN = 320, heatPos = new Float32Array(HEATN * 3), heatCol = new Float32Array(HEATN * 3);
+    const heatGeo = new T.BufferGeometry();
+    heatGeo.setAttribute('position', new T.BufferAttribute(heatPos, 3)); heatGeo.setAttribute('color', new T.BufferAttribute(heatCol, 3));
+    const heatPts = new T.Points(heatGeo, new T.PointsMaterial({ size: .12, map: dot, vertexColors: true, transparent: true, depthWrite: false }));
+    heatPts.frustumCulled = false; scene.add(heatPts);
+    const heat = Array.from({ length: HEATN }, () => ({ life: 0, x: 0, y: -9, z: 0, vy: 0, ph: Math.random() * 6 }));
+    let heatNext = 0;
+    const HC = lin('#e0301e');
+    function stepHeat(dt, time) {
+      if (!reduced()) for (const r of racks) {
+        const tt = tOf(r.T);
+        if (tt < .72 || Math.random() > (tt - .72) * 30 * dt) continue;
+        const q = heat[heatNext]; heatNext = (heatNext + 1) % HEATN;
+        q.life = 1; q.x = r.x + (Math.random() - .5) * RW; q.z = r.z + (Math.random() - .5) * RD; q.y = RH + .05; q.vy = .45 + Math.random() * .4;
+      }
+      for (let n = 0; n < HEATN; n++) {
+        const q = heat[n];
+        if (q.life > 0) { q.life -= dt * .5; q.y += q.vy * dt; q.x += Math.sin(time * 2 + q.ph) * dt * .08; }
+        const l = Math.max(0, q.life);
+        heatPos[n * 3] = q.x; heatPos[n * 3 + 1] = l > 0 ? q.y : -9; heatPos[n * 3 + 2] = q.z;
+        heatCol[n * 3] = BG.r + (HC.r - BG.r) * l; heatCol[n * 3 + 1] = BG.g + (HC.g - BG.g) * l; heatCol[n * 3 + 2] = BG.b + (HC.b - BG.b) * l;
+      }
+      heatGeo.attributes.position.needsUpdate = true; heatGeo.attributes.color.needsUpdate = true;
+    }
+
+    // jobs moving between racks, drawn as a ball on an arc with its path behind it
+    const pkGeo = new T.SphereGeometry(.13, 20, 14);
+    const packets = [];
+    function launch(fromR, to, color, dur, onArrive) {
+      const p0 = new T.Vector3(fromR.x, RH + .2, fromR.z);
+      const p2 = to.isVector3 ? to.clone() : new T.Vector3(to.x, RH + .2, to.z);
+      const mid = p0.clone().lerp(p2, .5); mid.y = Math.max(p0.y, p2.y) + 1.3 + p0.distanceTo(p2) * .14;
+      const curve = new T.QuadraticBezierCurve3(p0, mid, p2);
+      const c = lin(color);
+      const mesh = new T.Mesh(pkGeo, new T.MeshStandardMaterial({ color: c, roughness: .35 }));
+      mesh.castShadow = true; mesh.position.copy(p0);
+      const trail = new T.Mesh(new T.TubeGeometry(curve, 48, .024, 6, false), new T.MeshBasicMaterial({ color: c, transparent: true, opacity: .38, depthWrite: false }));
+      scene.add(mesh, trail);
+      packets.push({ curve, mesh, trail, t: 0, dur, onArrive });
+    }
+    function dropPacket(q) { scene.remove(q.mesh, q.trail); q.mesh.material.dispose(); q.trail.geometry.dispose(); q.trail.material.dispose(); }
+    function clearPackets() { packets.forEach(dropPacket); packets.length = 0; }
+    function stepPackets(dt) {
+      for (let k = packets.length - 1; k >= 0; k--) {
+        const q = packets[k]; q.t += dt;
+        const u = Math.min(1, q.t / q.dur), e = u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2;
+        q.mesh.position.copy(q.curve.getPoint(e));
+        if (u >= 1) { if (q.onArrive) q.onArrive(); dropPacket(q); packets.splice(k, 1); }
+      }
+    }
+
+    // forecast zone painted on the floor around the racks about to overheat
+    const zoneMat = new T.MeshBasicMaterial({ color: lin('#e0301e'), transparent: true, opacity: 0, depthWrite: false });
+    const zone = new T.Group(); scene.add(zone);
+    function setZone(rs) {
+      while (zone.children.length) { const c = zone.children[0]; zone.remove(c); c.geometry.dispose(); }
+      const pad = .3, xs = rs.map(r => r.x), zs = rs.map(r => r.z), th = .08;
+      const x0 = Math.min(...xs) - RW / 2 - pad, x1 = Math.max(...xs) + RW / 2 + pad, z0 = Math.min(...zs) - RD / 2 - pad, z1 = Math.max(...zs) + RD / 2 + pad;
+      [[x0, z0, x1, z0], [x1, z0, x1, z1], [x1, z1, x0, z1], [x0, z1, x0, z0]].forEach(([a1, b1, a2, b2]) => {
+        const m = new T.Mesh(new T.BoxGeometry(Math.hypot(a2 - a1, b2 - b1) + th, .02, th), zoneMat);
+        m.position.set((a1 + a2) / 2, .02, (b1 + b2) / 2); m.rotation.y = -Math.atan2(b2 - b1, a2 - a1); zone.add(m);
+      });
+    }
+
+    // labels pinned to points in the hall
+    const tags = {}, v3 = new T.Vector3();
+    function mkTag(name, cls) {
+      const d = document.createElement('div'); d.className = 'tag ' + cls; d.innerHTML = '<span></span><i></i>';
+      tagHost.appendChild(d); tags[name] = { el: d, txt: d.firstChild, pos: new T.Vector3(), on: false, html: '' };
+    }
+    function setTag(name, on, pos, html) {
+      const t = tags[name]; t.on = on;
+      if (pos) t.pos.copy(pos);
+      if (html != null && html !== t.html) { t.txt.innerHTML = html; t.html = html; }
+    }
+    function placeTags() {
+      for (const k in tags) {
+        const t = tags[k];
+        if (!t.on) { t.el.classList.remove('on'); continue; }
+        v3.copy(t.pos).project(camera);
+        t.el.style.transform = 'translate(' + ((v3.x + 1) / 2 * W).toFixed(1) + 'px,' + ((1 - v3.y) / 2 * H).toFixed(1) + 'px) translate(-50%,-100%)';
+        t.el.classList.add('on');
+      }
+    }
+    function tagsOff() { for (const k in tags) tags[k].on = false; placeTags(); }
+    ['hot:hot', 'cool:cold', 'ice:cold', 'fc:hot', 'geo:amber'].forEach(x => { const [n, c] = x.split(':'); mkTag(n, c); });
+    const topOf = (r, up) => new T.Vector3(r.x, RH + (up || .25), r.z);
+
+    // camera: each scene slide has a pose, and moving between them is one continuous flight
+    const POSES = {
+      title: { x: -1.4, y: 0, z: 0, d: 30, p: 57, a: 24, s: 400 },
+      problem: { x: -.6, y: .4, z: -.6, d: 27, p: 53, a: 18, s: 345 },
+      sim: { x: -1.4, y: 0, z: 0, d: 26, p: 51, a: 26, s: -275 },
+      close: { x: -1.4, y: 0, z: 0, d: 38, p: 48, a: 38, s: 420 }
+    };
+    const cam = Object.assign({}, POSES.title), from = Object.assign({}, cam);
+    let goal = POSES.title, flyT = 1, drift = 0, mode = null, seen = false;
+    const FLY = 2.1;
+    function flyTo(key, instant) { goal = POSES[key]; Object.assign(from, cam); flyT = instant ? 1 : 0; if (instant) Object.assign(cam, goal); }
+    function stepCam(dt) {
+      if (flyT < 1) {
+        flyT = Math.min(1, flyT + dt / FLY);
+        const e = flyT < .5 ? 4 * flyT * flyT * flyT : 1 - Math.pow(-2 * flyT + 2, 3) / 2;
+        for (const k in goal) cam[k] = from[k] + (goal[k] - from[k]) * e;
+      }
+      const want = (mode === 'title' || mode === 'close') && !reduced() ? 3.5 : 0;
+      drift += (want - drift) * Math.min(1, dt * .8);
+    }
+    function applyCam(time) {
+      const az = (cam.a + drift * Math.sin(time * .12)) * Math.PI / 180, po = cam.p * Math.PI / 180;
+      camera.position.set(cam.x + cam.d * Math.sin(po) * Math.sin(az), cam.y + cam.d * Math.cos(po), cam.z + cam.d * Math.sin(po) * Math.cos(az));
+      camera.lookAt(cam.x, cam.y, cam.z);
+      camera.setViewOffset(W, H, -cam.s, 0, W, H);
+      scene.fog.near = cam.d - 3; scene.fog.far = cam.d + 48;
+    }
+
+    // what the hall is doing on each scene slide
+    let coolPow = 100, air = 0, airT = 0;
+    const hsh = r => (r.i * 17 + r.j * 31) % 10;
+    const cracTop = new T.Vector3(cracX, 2.25, (rowZ[2] + rowZ[3]) / 2);
+    const simCluster = [at(2, 6), at(2, 7), at(3, 6), at(3, 7)];
+    const phaseEls = $$('#simPhases li');
+    const ro = { hot: $('#roHot'), clock: $('#roClock'), jobs: $('#roJobs'), cool: $('#roCool') };
+    const PH = [3.2, 6.4, 10.8], END = 14.5;
+    const GEO = new T.Vector3(-17, 5, -24);
+    const sim = { t: 0, phase: -1, launches: [], jobs: 0, geo: 0 };
+    function clockStr() { const s2 = Math.max(0, 600 - (sim.t - PH[0]) * 45); return Math.floor(s2 / 60) + ':' + String(Math.floor(s2 % 60)).padStart(2, '0'); }
+    function simReset() {
+      sim.t = 0; sim.phase = -1; sim.launches = []; sim.jobs = 0; sim.geo = 0; coolPow = 100; airT = .7;
+      racks.forEach(r => { const h = hsh(r); r.load = h < 4 ? .06 + h * .025 : .22 + (h - 4) * .03; });
+      simCluster.forEach(r => { r.load = .62; });
+      phaseEls.forEach(li => li.classList.remove('now', 'done'));
+    }
+    function simReadouts() {
+      const ph = sim.phase, maxT = Math.max(...racks.map(r => r.T));
+      ro.hot.textContent = maxT.toFixed(1) + '°C'; ro.hot.style.color = maxT > 30 ? 'var(--heat)' : 'var(--cold)';
+      if (ph <= 0) { ro.clock.textContent = '—'; ro.clock.style.color = ''; }
+      else if (ph === 1) { ro.clock.textContent = 'in ' + clockStr(); ro.clock.style.color = 'var(--heat)'; }
+      else { ro.clock.textContent = 'Averted'; ro.clock.style.color = 'var(--cold)'; }
+      ro.jobs.textContent = sim.jobs; ro.cool.textContent = Math.round(coolPow) + '%';
+      const hot = simCluster.reduce((m, r) => (r.T > m.T ? r : m), simCluster[0]);
+      setTag('fc', ph === 1 || (ph === 2 && sim.t < PH[1] + 1.4), topOf(hot),
+        ph === 1 ? 'Hotspot forecast, rack ' + hot.id + '<small>Peak of 35.1°C in ' + clockStr() + '</small>' : 'Moving jobs<small>Hotspot averted</small>');
+      setTag('geo', sim.geo > 0, new T.Vector3(-7.5, 4.4, rowZ[0] - 3.2), sim.geo + ' job' + (sim.geo > 1 ? 's' : '') + ' sent to Dublin<small>A cooler facility</small>');
+    }
+    function simStep(dt) {
+      if (sim.t <= END + 1) {
+        sim.t += dt;
+        const t = sim.t, ph = t < PH[0] ? 0 : t < PH[1] ? 1 : t < PH[2] ? 2 : 3;
+        if (ph !== sim.phase) {
+          sim.phase = ph;
+          phaseEls.forEach((li, k) => { li.classList.toggle('done', k < ph); li.classList.toggle('now', k === ph); });
+          if (ph === 1) setZone(simCluster);
+          if (ph === 2) {
+            const targets = racks.filter(r => !simCluster.includes(r)).sort((x, y) => x.load - y.load).slice(0, 8);
+            for (let k = 0; k < 10; k++) { const g = k === 4 || k === 9; sim.launches.push({ at: PH[1] + .15 + k * .38, from: simCluster[k % 4], to: g ? null : targets[k < 4 ? k : k - 1], geo: g }); }
+          }
+          if (ph === 3) airT = .25;
+        }
+        if (ph === 0) simCluster.forEach(r => { r.load = lerp(.62, .84, t / PH[0]); });
+        if (ph === 1) simCluster.forEach(r => { r.load = lerp(.84, .9, (t - PH[0]) / (PH[1] - PH[0])); });
+        while (sim.launches.length && sim.launches[0].at <= t) {
+          const L = sim.launches.shift(); L.from.load -= .2;
+          if (L.geo) launch(L.from, GEO, '#ef9a2b', 1.7, () => { sim.geo++; sim.jobs++; });
+          else launch(L.from, L.to, '#1550e8', 1.1, () => { L.to.load += .2; sim.jobs++; });
+        }
+        if (ph === 3) { racks.forEach(r => { if (r.load < .3) r.load += (.3 - r.load) * Math.min(1, dt * 1.2); }); coolPow += (79 - coolPow) * Math.min(1, dt * 1.4); }
+      }
+      simReadouts();
+    }
+    const MODES = {
+      title: {
+        enter() {
+          racks.forEach(r => { r.load = .22 + (hsh(r) % 5) * .03; });
+          at(2, 7).load = .95; [at(2, 6), at(2, 8), at(3, 7)].forEach(r => { r.load = .55; });
+          this.t = 0; this.sent = 0; airT = .3; coolPow = 100;
+        },
+        step(dt) {
+          this.t += dt;
+          const h = at(2, 7), dests = [at(5, 11), at(0, 2), at(4, 1)];
+          if (this.sent < 3 && this.t > 1.6 + this.sent * .55) { const to = dests[this.sent]; h.load -= .2; launch(h, to, '#1550e8', 1.2, () => { to.load += .1; }); this.sent++; }
+          if (this.t > 3.6) racks.forEach(r => { if (r.load > .42) r.load += (.36 - r.load) * Math.min(1, dt * 1.2); });
+        }
+      },
+      problem: {
+        enter() {
+          racks.forEach(r => { r.load = .02 + (hsh(r) % 4) * .015; });
+          at(2, 6).load = .93; at(2, 7).load = .97; at(2, 8).load = .91;
+          [at(2, 5), at(2, 9), at(3, 7)].forEach(r => { r.load = .5; });
+          airT = 1; coolPow = 100;
+        },
+        step() {
+          setTag('hot', true, topOf(at(2, 7), .35), 'Micro-hotspot<small>Three racks at 35°C</small>');
+          setTag('cool', true, cracTop, 'Cooling units at 100%');
+          setTag('ice', true, topOf(at(5, 9)), 'Overcooled<small>Every other rack, about 18°C</small>');
+        }
+      },
+      sim: { enter() { simReset(); }, step(dt) { simStep(dt); } },
+      close: {
+        enter() { racks.forEach(r => { r.load = .25 + (hsh(r) % 5) * .025; }); airT = .25; coolPow = 79; },
+        step() {}
+      }
+    };
+    function fastForward(key) {
+      for (let k = 0; k < 340; k++) { MODES[key].step.call(MODES[key], .05); stepPackets(.05); racks.forEach(r => { r.T += (18 + r.load * 18 + r.off - r.T) * .07; }); }
+      clearPackets();
+    }
+
+    let time = 0, lastNow = 0;
+    const comp = {
+      tick(_, now) {
+        // wall-clock time step, so flights and the simulation keep real time on slower machines
+        const dt = lastNow ? Math.min(.25, Math.max(0, now - lastNow)) : 1 / 60;
+        lastNow = now; time = now;
+        stepCam(dt);
+        if (mode) MODES[mode].step.call(MODES[mode], dt);
+        for (const r of racks) r.T += (18 + r.load * 18 + r.off - r.T) * Math.min(1, dt * 1.3);
+        paint();
+        air += (airT - air) * Math.min(1, dt * 1.2);
+        airMat.opacity = reduced() ? 0 : .7 * air;
+        if (air > .02 && !reduced()) stepAir(dt, air);
+        stepHeat(dt, time);
+        stepPackets(dt);
+        zoneMat.opacity = mode === 'sim' ? (sim.phase === 1 ? .6 + .3 * Math.sin(time * 5) : sim.phase === 2 ? Math.max(0, zoneMat.opacity - dt * .8) : 0) : 0;
+        applyCam(time);
+        renderer.render(scene, camera);
+        placeTags();
+      }
+    };
+    return {
+      enter(key) {
+        host.classList.add('show');
+        tagsOff(); clearPackets();
+        MODES[key].enter.call(MODES[key]);
+        mode = key;
+        flyTo(key, !seen || reduced());
+        if (reduced()) fastForward(key);
+        seen = true;
+        lastNow = 0;
+        running.add(comp);
+      },
+      leave() { host.classList.remove('show'); tagsOff(); running.delete(comp); },
+      replay() { if (mode === 'sim') { tagsOff(); clearPackets(); simReset(); if (reduced()) fastForward('sim'); } },
+      resize(R) { renderer.setPixelRatio(R); renderer.setSize(W, H, false); }
+    };
+  }
+  try { S3 = makeHall3D($('#scene3d'), $('#tags')); } catch (e) { S3 = null; }
+  const use3d = () => !!S3 && !isNarrow();
+  const hooks2d = { s1: hooks.s1, s8: hooks.s8 };
+  slides.filter(s => s.dataset.scene).forEach(s => {
+    const key = s.dataset.scene, h2 = hooks2d[s.id];
+    hooks[s.id] = {
+      enter() { if (use3d()) S3.enter(key); else if (h2 && h2.enter) h2.enter(); },
+      leave() { if (use3d()) S3.leave(); else if (h2 && h2.leave) h2.leave(); }
+    };
+  });
+  $('#simReplay').addEventListener('click', () => { if (use3d()) S3.replay(); else if (sim2dReplay) sim2dReplay(); });
+
   /* ---------- main loop ---------- */
   let last = performance.now();
   function frame(now) {
@@ -1679,7 +2223,9 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
   /* ---------- slideshow on wide screens, stacked reading on phones ---------- */
   let io = null;
   function setMode() {
+    stage.classList.toggle('has3d', use3d());
     if (isNarrow()) {
+      if (S3) S3.leave();
       slides.forEach(s => { s.classList.remove('active'); if (s.classList.contains('on')) leave(s); });
       io = new IntersectionObserver(entries => {
         entries.forEach(en => {
@@ -1706,12 +2252,13 @@ h3{font:700 32px/1.15 var(--f);letter-spacing:-.01em;text-wrap:balance}
     const want = fromHash != null ? fromHash : clamp(+(data && data.cur) || 0, 0, N - 1);
     slides[0].classList.remove('active', 'on');
     cur = want;
+    stage.classList.toggle('has3d', use3d());
     fit();
     if (isNarrow()) setMode(); else go(want, true);
     requestAnimationFrame(t => { last = t; frame(t); });
     if (!isNarrow()) {
       wake();
-      toast('Press <kbd>F</kbd> for fullscreen and <kbd>Esc</kbd> to leave it. Use <kbd>←</kbd> <kbd>→</kbd> or space to move between slides.', 6000);
+      toast('Press <kbd>F</kbd> for fullscreen and <kbd>Esc</kbd> to leave it. <kbd>←</kbd> <kbd>→</kbd> move between slides, <kbd>G</kbd> shows every slide, and <kbd>P</kbd> opens presenter notes.', 6500);
     }
   }
   addEventListener('hashchange', () => { const m = location.hash.match(/^#(\d{1,2})$/); if (m) go(+m[1] - 1); });
