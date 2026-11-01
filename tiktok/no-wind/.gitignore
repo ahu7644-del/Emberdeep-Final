@@ -1,0 +1,3 @@
+build/
+assets/kokoro
+__pycache__/
